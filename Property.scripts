@@ -1,0 +1,443 @@
+
+
+/****** Object:  Table [dbo].[Regions]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Regions](
+	[RegionID] [int] IDENTITY(1,1) NOT NULL,
+	[RegionName] [nvarchar](100) NULL,
+	[RegionParentID] [int] NULL,
+ CONSTRAINT [PK_Cities] PRIMARY KEY CLUSTERED 
+(
+	[RegionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[Features]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Features](
+	[FeatureID] [int] IDENTITY(1,1) NOT NULL,
+	[FeatureName] [nvarchar](50) NULL,
+	[FeatureParentID] [int] NULL,
+	[Icon] [nvarchar](100) NULL,
+	[Active] [bit] NULL CONSTRAINT [DF_Features_Active]  DEFAULT ((1)),
+ CONSTRAINT [PK_Features] PRIMARY KEY CLUSTERED 
+(
+	[FeatureID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[PropertyTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PropertyTypes](
+	[PropertyTypeID] [int] IDENTITY(1,1) NOT NULL,
+	[PropertyTypeName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_PropertyTypes] PRIMARY KEY CLUSTERED 
+(
+	[PropertyTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[ProjectTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ProjectTypes](
+	[ProjectTypeID] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectTypeName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_ProjectTypes] PRIMARY KEY CLUSTERED 
+(
+	[ProjectTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[MediaFiles]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MediaFiles](
+	[MediaID] [bigint] NOT NULL,
+	[PropertyID] [bigint] NULL,
+	[MediaUrl] [nvarchar](150) NULL,
+	[Active] [bit] NULL,
+	[Priority] [tinyint] NULL,
+	[MediaTypeID] [tinyint] NULL,
+ CONSTRAINT [PK_PropertyMedia] PRIMARY KEY CLUSTERED 
+(
+	[MediaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[MediaTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MediaTypes](
+	[MediaTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[MediaTypeName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_MediaTypes] PRIMARY KEY CLUSTERED 
+(
+	[MediaTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[ShortListProperties]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ShortListProperties](
+	[ShortListID] [int] IDENTITY(1,1) NOT NULL,
+	[PropertyID] [bigint] NULL,
+	[UserID] [int] NULL,
+ CONSTRAINT [PK_ShortListProperties] PRIMARY KEY CLUSTERED 
+(
+	[ShortListID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[ContactPersonTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ContactPersonTypes](
+	[ContactPersonTypeID] [tinyint] NOT NULL,
+	[ContactPersonTypeName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_ContactPersonTypes] PRIMARY KEY CLUSTERED 
+(
+	[ContactPersonTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[OwnershipTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[OwnershipTypes](
+	[OwnershipTypeID] [tinyint] NOT NULL,
+	[OwnershipTypeName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_OwnershipTypes] PRIMARY KEY CLUSTERED 
+(
+	[OwnershipTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[PropertyReports]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PropertyReports](
+	[PropertyReportID] [int] NOT NULL,
+	[PropertyID] [bigint] NULL,
+	[UserID] [int] NULL,
+	[Reason] [nvarchar](200) NULL,
+ CONSTRAINT [PK_PropertyReports] PRIMARY KEY CLUSTERED 
+(
+	[PropertyReportID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[PropertyFeatures]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PropertyFeatures](
+	[PropertyFeatureID] [bigint] IDENTITY(1,1) NOT NULL,
+	[PropertyID] [bigint] NULL,
+	[FeatureID] [int] NULL,
+ CONSTRAINT [PK_PropertyFeatures] PRIMARY KEY CLUSTERED 
+(
+	[PropertyFeatureID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[PropertyCallRequests]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PropertyCallRequests](
+	[PropertyCallRequestID] [int] IDENTITY(1,1) NOT NULL,
+	[PropertyID] [bigint] NULL,
+	[Name] [nvarchar](50) NULL,
+	[Mobile] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+ CONSTRAINT [PK_PropertyCallRequests] PRIMARY KEY CLUSTERED 
+(
+	[PropertyCallRequestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[ContactPersons]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ContactPersons](
+	[ContactPersonID] [int] IDENTITY(1,1) NOT NULL,
+	[ContactName] [nvarchar](50) NOT NULL,
+	[ContactEmail] [nvarchar](50) NULL,
+	[ContactPhone] [nvarchar](50) NULL,
+	[ContactMobile] [nvarchar](50) NULL,
+ CONSTRAINT [PK_ContactPersons] PRIMARY KEY CLUSTERED 
+(
+	[ContactPersonID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[PropertyComments]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PropertyComments](
+	[PropertyCommentID] [bigint] NULL,
+	[PropertyID] [bigint] NULL,
+	[UserID] [bigint] NULL,
+	[Comment] [nvarchar](1000) NULL,
+	[Active] [bit] NULL,
+	[Likes] [int] NULL,
+	[Dislikes] [int] NULL,
+	[ParentCommentID] [bigint] NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[News]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[News](
+	[NewsID] [int] NOT NULL,
+	[Title] [nvarchar](500) NULL,
+ CONSTRAINT [PK_News] PRIMARY KEY CLUSTERED 
+(
+	[NewsID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[Pages]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Pages](
+	[PageID] [int] NOT NULL,
+	[PageTitle] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Pages] PRIMARY KEY CLUSTERED 
+(
+	[PageID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[SiteURLs]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SiteURLs](
+	[URLID] [int] NOT NULL,
+	[URL] [nvarchar](200) NULL,
+	[TableName] [nvarchar](50) NULL,
+	[TableID] [bigint] NULL,
+ CONSTRAINT [PK_SiteURLs] PRIMARY KEY CLUSTERED 
+(
+	[URLID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[PriceTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PriceTypes](
+	[PriceTypeID] [tinyint] NOT NULL,
+	[PriceTypeName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_PriceTypes] PRIMARY KEY CLUSTERED 
+(
+	[PriceTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[AreaTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AreaTypes](
+	[AreaTypeID] [tinyint] NOT NULL,
+	[AreaTypeName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_AreaTypes] PRIMARY KEY CLUSTERED 
+(
+	[AreaTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[FurnitureTypes]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FurnitureTypes](
+	[FurnitureTypeID] [tinyint] NOT NULL,
+	[FurnitureTypeName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_FurnitureTypes] PRIMARY KEY CLUSTERED 
+(
+	[FurnitureTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[Properties]    Script Date: 5/6/2017 9:19:43 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Properties](
+	[PropertyID] [bigint] IDENTITY(1,1) NOT NULL,
+	[CreationDate] [datetime] NULL,
+	[CountryID] [int] NULL,
+	[CityID] [int] NULL,
+	[ResidanceID] [int] NULL,
+	[StreetID] [int] NULL,
+	[LocationLat] [nvarchar](50) NULL,
+	[LocationLang] [nvarchar](50) NULL,
+	[ContactPersonID] [int] NULL,
+	[AddedByUserID] [bigint] NULL,
+	[Active] [bit] NULL,
+	[PropertyTitle] [nvarchar](500) NULL,
+	[Description] [nvarchar](1000) NULL,
+	[Area] [nvarchar](50) NULL,
+	[AreaTypeID] [tinyint] NULL,
+	[Price] [money] NULL,
+	[PriceTypeID] [tinyint] NULL,
+	[BedRooms] [int] NULL,
+	[Bathrooms] [int] NULL,
+	[Floor] [int] NULL,
+	[FurnitureTypeID] [tinyint] NULL,
+ CONSTRAINT [PK_Units] PRIMARY KEY CLUSTERED 
+(
+	[PropertyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[MediaFiles] ADD  CONSTRAINT [DF_PropertyMedia_Active]  DEFAULT ((0)) FOR [Active]
+GO
+
+ALTER TABLE [dbo].[PropertyComments] ADD  CONSTRAINT [DF_PropertyComments_Active]  DEFAULT ((0)) FOR [Active]
+GO
+
+ALTER TABLE [dbo].[PropertyComments] ADD  CONSTRAINT [DF_PropertyComments_Likes]  DEFAULT ((0)) FOR [Likes]
+GO
+
+ALTER TABLE [dbo].[PropertyComments] ADD  CONSTRAINT [DF_PropertyComments_Dislikes]  DEFAULT ((0)) FOR [Dislikes]
+GO
+
+ALTER TABLE [dbo].[Properties] ADD  CONSTRAINT [DF_Properties_Active]  DEFAULT ((0)) FOR [Active]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Villa, Flat, Building, ...' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ProjectTypes', @level2type=N'COLUMN',@level2name=N'ProjectTypeName'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Visible order' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'MediaFiles', @level2type=N'COLUMN',@level2name=N'Priority'
+GO
+
+
